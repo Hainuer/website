@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="zh-CN">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<title>{% block title %}{% endblock %} - Kume博客</title>
+		<meta name="generator" content="#" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+		<link href="{% static "css/kume/bootstrap.min.css" %}" rel="stylesheet">
+		<!--[if lt IE 9]>
+		<script src="http://cdn.bootcss.com/html5shiv/r29/html5.js"></script>
+		<![endif]-->
+		<link href="{% static "css/kume/styles.css" %}" rel="stylesheet">
+		<link href="{% static "plugins/prism/prism.css" %}" rel="stylesheet">
+		<link rel="shortcut icon" href="{% static "images/favicon.ico" %}" type="image/x-icon"/>
+	<body>
+		<div class="wrapper">
+			<div class="box">
+				<div class="row">
+					<!-- sidebar -->
+					<div class="column col-sm-2" id="sidebar">
+						<a class="logo" href="/kume/"><img src="{% static "images/favicon.ico" %}" alt="夏日午后, 忘记行走" /></a>
+						<a class="logo" href="/kume/">夏日午后<br />忘记行走</a>
+						<ul class="nav">
+							<li>
+								<a href="/kume/">首页</a>
+							</li>
+							{% if categories %}
+							{% for category in categories %}
+							<li>
+								<a href="{% url 'category' category.simple_name %}">{{ category.name }}</a>
+							</li>
+							{% endfor %}
+							{% endif %}
+							<li>
+								<a href="{% url 'archive' %}">文章归档</a>
+							</li>
+							<li>
+								<a href="{% url 'about' %}">About Me</a>
+							</li>
+						</ul>
+						<ul class="nav hidden-xs" id="sidebar-footer">
+							<li>
+								<a href="http://www.hainuer.com">
+									<h4>夏日午后, 忘记行走</h4>
+									Made By<br /> 
+									<i class="glyphicon glyphicon-heart"></i> Phoenix Pham
+								</a>
+							</li>
+						</ul>
+					</div>
+					<!-- /sidebar -->
+
+					<!-- main -->
+					<div class="column col-sm-10" id="main">
+						<div class="padding">
+							<div class="full col-sm-9">
+								{% block contents %}{% endblock %}
+								<div class="col-sm-12">
+									<div class="page-header text-muted divider">
+										保持联系
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<a href="http://www.weibo.com/ihainuer">新浪微博</a><small class="text-muted"> | </small>
+										<a href="http://plus.google.com/GeekPhx">Google Plus</a>
+									</div>
+								</div>
+								<hr>
+								<div class="row" id="footer">
+									<div class="col-sm-6">
+										<p>
+											技术选型: 
+											<a target="_blank" href="http://getbootstrap.com">BootStrap</a> · 
+											<a target="_blank" href="http://www.python.org">Python2</a> · 
+											<a target="_blank" href="http://www.djangoproject.com">Django</a>
+										</p>	
+									</div>
+									<div class="col-sm-6">
+										<p class="pull-right">
+											&copy; 2015 Phoenix @ <a href="/">Hainuer</a> . All rights reserved.
+										</p>
+									</div>
+								</div>
+								<hr>
+							</div>
+						</div>
+					</div>
+					<!-- /main -->
+				</div>
+			</div>
+		</div>
+		
+		<!-- script references -->
+		<script src="http://ajax.useso.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script src="{% static "scripts/kume/bootstrap.min.js" %}"></script>
+		<script src="{% static "plugins/prism/prism.js" %}"></script>
+	</body>
+</html>

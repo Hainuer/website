@@ -1,0 +1,27 @@
+{% extends 'zhaokao_base.html' %}
+{% block page_title %}
+{{ page_title }}
+{% endblock %}
+
+{% block main_body %}
+{% if items %}
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+  			<div class="panel-heading">招聘信息</div>
+    			<div class="list-group">
+				{% for item in items %}
+		  		<a target="_blank" href="{% url 'view' item.link %}" class="list-group-item">
+		  			<span class="badge">{{ item.up_date }}</span>
+		    		{{ item.title }}
+		  		</a>
+		  		{% endfor %}
+		  		</div>
+  			</div>
+		</div>
+	</div>
+</div>
+{% else %}
+
+{% endif %}
+{% endblock %}

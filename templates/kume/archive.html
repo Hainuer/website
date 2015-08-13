@@ -1,0 +1,32 @@
+{% extends 'kume_base.html' %}
+{% block title %}
+	{{ title }}
+{% endblock %}
+{% block contents %}
+{% if articles %}
+<div class="col-sm-12">
+	<div class="page-header text-muted">
+		文档归档
+	</div>
+</div>
+{% for article in articles %}
+<div class="row">
+	<div class="col-sm-12">
+		<h3><a href="{% url 'post' article.uuid %}">{{ article.title }}</a></h3>
+		<h4><small class="text-muted">{{ article.pub_date }} • <a href="{% url 'category' article.category.simple_name %}" class="text-muted">{{ article.category.name }}</a> • 热度: {{ article.views }}'C <a href="{% url 'post' article.uuid %}" class="label label-success pull-right">开始阅读</a></small></h4>
+	</div>
+</div>
+<div class="row divider">
+	<div class="col-sm-12">
+		<hr>
+	</div>
+</div>
+{% endfor %}
+{% else %}
+<div class="col-sm-12">
+	<div class="page-header text-muted">
+		呃, 网站一片空白, 开始享受写作的乐趣吧 !
+	</div>
+</div>						
+{% endif %}
+{% endblock %}

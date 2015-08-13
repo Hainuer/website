@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<title>{% block page_title %}{% endblock %} - 贵州招考资讯网</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+		<link rel="stylesheet" href="{% static "css/zhaokao/bootstrap.css" %}" media="screen">
+		<link rel="stylesheet" href="{% static "css/zhaokao/bootswatch.min.css" %}">
+		<link rel="stylesheet" href="{% static "css/zhaokao/style.css" %}">
+		<link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="{% static "scripts/zhaokao/html5shiv.js" %}"></script>
+			<script src="{% static "scripts/zhaokao/respond.min.js" %}"></script>
+		<![endif]-->	
+	</head>
+	<body>
+		<div class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<a href="/zhaokao/" class="navbar-brand">WeWantYou</a>
+					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="navbar-collapse collapse" id="navbar-main">
+					<ul class="nav navbar-nav">
+						<li {% if page_active == '0' %}class="active"{% endif %}>
+							<a href="/zhaokao/">首页</a>
+						</li>
+						<li class="dropdown {% if page_active == '2' %}active{% endif %}">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="" id="themes">招考资讯 <span class="caret"></span></a>
+							<ul class="dropdown-menu" aria-labelledby="themes">
+								{% for cat in categories %}
+								<li>
+									<a href="{% url 'category' cat.city_code %}">{{ cat.city }}</a>
+								</li>
+								{% endfor %}
+								<li>
+									<a href="/zhaokao/category/guian/">贵安新区</a>
+								</li>
+							</ul>
+						</li>
+						<li {% if page_active == '4' %}class="active"{% endif %}>
+							<a href="{% url 'want' %}">招聘信息</a>
+						</li>
+						<li {% if page_active == '8' %}class="active"{% endif %}>
+							<a href="{% url 'notice' %}">免责声明</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div style="margin: 30px 0 0 0;"></div>
+			{% if categories %}
+			<div class="panel panel-default">
+			   <div class="panel-heading">招考直达</div>
+			  <div class="panel-body">
+			    {% for cat in categories %}
+					<a href="{% url 'category' cat.city_code %}" style="margin-top:5px" class="btn btn-primary btn-sm">{{ cat.city }}</a>
+				{% endfor %}
+				<a href="/zhaokao/category/guian/" style="margin-top:5px" class="btn btn-primary btn-sm">贵安新区</a>
+			  </div>
+			</div>
+			{% endif %}
+			{% block main_body %}{% endblock %}
+			<div style="margin: 30px 0 0 0;"></div>
+		</div>
+		<div class="footer-border">
+			<div class="container">
+				<footer>
+					<div class="row">
+						<div class="col-lg-12">
+							<ul class="list-unstyled">
+								<li class="pull-right">
+									<a href="#top">顶部</a>
+								</li>
+							</ul>
+							<p>
+								技术选型:
+								<a href="http://www.python.org" rel="nofollow">Python</a> · <a href="http://www.djangoproject.com" rel="nofollow">Django</a> · <a href="http://bootcss.com" rel="nofollow">BootStrap</a>
+							</p>
+							<p>
+								&copy; 2015 Phoenix @ <a href="/">Hainuer</a> . All rights reserved.
+							</p>
+						</div>
+					</div>
+				</footer>
+			</div>
+		</div>
+
+		<script src="http://libs.useso.com/js/jquery/1.10.2/jquery.min.js"></script>
+		<script src="{% static "scripts/zhaokao/bootstrap.js" %}"></script>
+		<script src="{% static "scripts/zhaokao/bootswatch.js" %}""></script>
+	</body>
+</html>
