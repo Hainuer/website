@@ -1,0 +1,37 @@
+{% extends 'duome_base.html' %}
+{% block page_title %}
+	{{ title }}
+{% endblock %}
+
+{% block main_body %}
+<div class="row">
+	<div class="col-lg-12">
+		<div class="page-header">
+			<h2>Duome 博客</h2>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		{% if articles %}
+		{% for article in articles %}
+		<div class="well">
+			<h2><a href="{% url 'duome:post' article.uuid %}">{{ article.title }}</a></h2>
+			<span class="badge">{{ article.pub_date }}</span>
+			<span class="badge">Phoenix</span>
+			<span class="badge">{{ article.category.name }}</span>
+			<span class="badge">{{ article.views }}'C</span>
+			<a href="{% url 'duome:post' article.uuid %}" class="btn btn-xs btn-info pull-right">继续阅读</a>
+			<br />
+			<br />
+			<p>{{ article.breviary | safe }}</p>
+		</div>
+		{% endfor %}
+		{% else %}
+		<div class="well">
+			<h4>对不起, 当前站点还没有发布过博客. 请前往管理中心添加吧!</h4>
+		</div>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}

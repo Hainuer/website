@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>{% block page_title %}{% endblock %} - 夏日午后 · 忘记行走</title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		
+		<link rel="stylesheet" href="{% static "css/duome/bootstrap.css" %}" media="screen">
+		<link rel="stylesheet" href="{% static "css/duome/bootswatch.min.css" %}">
+		<link rel="stylesheet" href="{% static "css/duome/style.css" %}">
+		<link rel="icon" type="image/x-icon" href="{% static "images/favicon.ico" %}">
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="{% static "scripts/duome/html5shiv.js" %}"></script>
+			<script src="{% static "scripts/duome/respond.min.js" %}"></script>
+		<![endif]-->
+		
+		<link href="{% static "plugins/prism/prism.css" %}" rel="stylesheet">
+	</head>
+	<body>
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<a href="{% url 'duome:index' %}" class="navbar-brand">Summer Afternoon</a>
+					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="navbar-collapse collapse" id="navbar-main">
+					<ul class="nav navbar-nav">
+						<li {% if activate_menu == '0' %}class="active"{% endif %}>
+							<a href="{% url 'duome:index' %}">主页</a>
+						</li>
+						{% if categories %}
+						<li class="dropdown {% if activate_menu == '2' %}active{% endif %}">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="" id="themes">博客目录 <span class="caret"></span></a>
+							<ul class="dropdown-menu" aria-labelledby="themes">
+								{% for category in categories %}
+								<li><a href="{% url 'duome:category' category.simple_name %}">{{ category.name }}</a></li>
+								{% endfor %}
+							</ul>
+						</li>
+						{% endif %}
+						<li {% if activate_menu == '4' %}class="active"{% endif %}>
+							<a href="{% url 'duome:mumbler' %}">碎碎念</a>
+						</li>
+						<li {% if activate_menu == '8' %}class="active"{% endif %}>
+							<a href="{% url 'duome:archive' %}">归档</a>
+						</li>
+						<li {% if activate_menu == '16' %}class="active"{% endif %}>
+							<a href="{% url 'duome:about' %}">About</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+			<div style="margin-top: 50px;">
+			</div>
+			{% block main_body %}{% endblock %}
+			<hr />
+			<footer>
+				<div class="row">
+					<div class="col-lg-12">
+						<ul class="list-unstyled">
+							<li class="pull-right">
+								<a href="#top">顶部</a>
+							</li>
+							<li>
+								<a href="http://plus.google.com/GeekPhx">Google+</a>
+							</li>
+						</ul>
+						<p>
+							技术选型: 
+							<a target="_blank" href="http://www.python.org" rel="nofollow">Python2</a>, 
+							<a target="_blank" href="http://www.djangoproject.com" rel="nofollow">Django</a>, 
+							<a target="_blank" href="http://www.bootcss.com" rel="nofollow">Bootstrap</a>.
+						</p>
+						<p>
+							Code released under the <a href="https://github.com/thomaspark/bootswatch/blob/gh-pages/LICENSE">MIT License</a>.
+						</p>
+						<p>
+							(c) Copyright 2015 Phoenix @ <a href="/">Hainuer</a> . All Rights Reserved. 
+						</p>
+					</div>
+				</div>
+			</footer>
+		</div>
+
+		<script src="http://libs.useso.com/js/jquery/1.10.2/jquery.min.js"></script>
+		<script src="{% static "scripts/duome/bootstrap.js" %}"></script>
+		<script src="{% static "scripts/duome/bootswatch.js" %}""></script>
+		<script src="{% static "plugins/prism/prism.js" %}"></script>
+	</body>
+</html>

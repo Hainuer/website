@@ -55,13 +55,16 @@
 						<nav class="pull-right nav-collapse collapse">
 							<ul id="menu-main" class="nav">
 								<li>
-									<a title="portfolio" href="#portfolio">Apps 开发</a>
+									<a title="portfolio" href="#portfolio">Apps</a>
 								</li>
 								<li>
-									<a title="news" href="#news">Kume 博客</a>
+									<a target="_blank" href="/kume/">Duome</a>
 								</li>
 								<li>
-									<a target="_blank" href="/zhaokao/">ZhaoKao 资讯</a>
+									<a target="_blank" href="/duome/">Duome</a>
+								</li>
+								<li>
+									<a target="_blank" href="/zhaokao/">ZhaoKao</a>
 								</li>
 							</ul>
 						</nav>
@@ -74,27 +77,12 @@
 		
 		<div id="headerwrap">
 			<header class="clearfix">
-				<h2><br/><span>夏日午后 · 忘记行走</span><br/><br/>Summer Afternoon, Forget Walking.</h2>
-				<div class="container">
-					<div class="row">
-						<div class="span12">
-							<ul class="icon">
-								<li>
-									<a href="http://www.facebook.com" target="_blank"><i class="icon-facebook-circled"></i></a>
-								</li>
-								<li>
-									<a href="http://www.twitter.com/hainuer" target="_blank"><i class="icon-twitter-circled"></i></a>
-								</li>
-								<li>
-									<a href="http://plus.google.com/GeekPhx" target="_blank"><i class="icon-gplus-circled"></i></a>
-								</li>
-								<li>
-									<a href="http://www.weibo.com/ihainuer" target="_blank"><i class="icon-skype-circled"></i></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
+				<h2>
+					<br/><br/><br/>
+					<span>夏日午后 · 忘记行走</span>
+					<br/><br/>
+					Summer Afternoon, Forget Walking.
+				</h2>
 			</header>
 		</div>
 
@@ -103,9 +91,9 @@
 				<div class="align">
 					<i class="icon-desktop-circled"></i>
 				</div>
-				<h1 id="folio-headline">Apps 开发</h1>
+				<h1 id="folio-headline">Apps</h1>
 				<div class="row">
-					<div class="span6">
+					<div class="span3">
 						<div class="mask2">
 							<a href="{% static "images/kume.png" %}" rel="prettyPhoto"><img src="{% static "images/kume.png" %}" alt=""></a>
 						</div>
@@ -114,14 +102,24 @@
 								<h2>Kume 博客</h2>
 							</hgroup>
 							<div class="entry-content">
-								<p>
-									使用Python, Django 1.8.0开发的简易博客。 目前主要实现了博客的添加、修改、删除等操作, 以及阅读。对界面进行了美化。后期计划新增的功能主要有: 评论模块及SEO优化等。
-								</p>
 								<a class="more-link" href="/kume/">View Kume</a>
 							</div>
 						</div>
 					</div>
-					<div class="span6">
+					<div class="span3">
+						<div class="mask2">
+							<a href="{% static "images/duome.png" %}" rel="prettyPhoto"><img src="{% static "images/duome.png" %}" alt=""></a>
+						</div>
+						<div class="inside">
+							<hgroup>
+								<h2>Duome 博客</h2>
+							</hgroup>
+							<div class="entry-content">
+								<a class="more-link" href="/duome/">View Duome</a>
+							</div>
+						</div>
+					</div>
+					<div class="span3">
 						<div class="mask2">
 							<a href="{% static "images/zhaokao.png" %}" rel="prettyPhoto"><img src="{% static "images/zhaokao.png" %}" alt=""></a>
 						</div>
@@ -130,42 +128,24 @@
 								<h2>ZhaoKao 贵州招考资讯网</h2>
 							</hgroup>
 							<div class="entry-content">
-								<p>
-									厌倦了招考资讯网站过多的广告, 所以做了这个App。 主要通过requests采集并使用BeautifulSoup4及正则表达式等进行分析提取相关内容, 然后采用BootStrap实现了前端Ui部分。
-								</p>
 								<a class="more-link" href="/zhaokao/">View ZhaoKao</a>
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-		</section>
-		
-		<hr>
-		
-		<section id="news" class="single-page scrollblock">
-			<div class="container">
-				<div class="align">
-					<i class="icon-pencil-circled"></i>
-				</div>
-				<h1>Kume 博客</h1>
-				<div class="row">
-					{% for article in articles %}
-					<article class="span12 post">
+					<div class="span3">
+						<div class="mask2">
+							<a href="{% static "images/under.png" %}" rel="prettyPhoto"><img height="80%" src="{% static "images/under.png" %}" alt=""></a>
+						</div>
 						<div class="inside">
-							<p class="post-date">
-								热度: {{ article.views }} C' · <i class="icon-calendar"></i> {{ article.pub_date }}
-							</p>
-							<h2>{{ article.title }}</h2>
+							<hgroup>
+								<h2>未完, 待续...</h2>
+							</hgroup>
 							<div class="entry-content">
-								<p>{{ article.breviary | safe }}</p>
-								<a target="_blank" href="kume/post/{{ article.uuid }}" class="more-link">阅读更多</a>
+								<a class="more-link" href="/">View Hainuer</a>
 							</div>
 						</div>
-					</article>
-					{% endfor %}
+					</div>
 				</div>
-				<a href="kume/" class="btn btn-large">到Kume看看吧</a>
 			</div>
 		</section>
 		<hr>

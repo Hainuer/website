@@ -8,10 +8,10 @@
 <div class="col-sm-12" id="featured">
 	<ol class="breadcrumb page-header">
 		<li>
-			<a href="/kume/">主页</a>
+			<a href="{% url 'kume:index' %}">主页</a>
 		</li>
 		<li>
-			<a href="{% url 'category' article.category.simple_name %}">{{ article.category.name }}</a>
+			<a href="{% url 'kume:category' article.category.simple_name %}">{{ article.category.name }}</a>
 		</li>
 		<li class="active">
 			{{ article.title }}
@@ -22,12 +22,8 @@
 <div class="row">
 	<div class="col-sm-12">
 		<h3>{{ article.title }}</h3>
-		<h4><small class="text-muted">{{ article.pub_date }} • <a href="{% url 'category' article.category.simple_name %}" class="text-muted">{{ article.category.name }}</a> • 热度: {{ article.views }}'C</small></h4>
-
+		<h4><small class="text-muted">{{ article.pub_date }} • <a href="{% url 'kume:category' article.category.simple_name %}" class="text-muted">{{ article.category.name }}</a> • 热度: {{ article.views }}'C</small></h4>
 		<hr>
-		<div class="alert alert-success" role="alert">
-			{{ article.breviary | safe }}
-		</div>
 		{{ article.content | safe }}
 	</div>
 </div>

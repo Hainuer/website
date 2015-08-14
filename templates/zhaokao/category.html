@@ -13,7 +13,7 @@
   		<div class="panel-heading">地区导航</div>
     	<div class="panel-body">
 		{% for juris in jurisdiction %}
-		  	<a href="{% url 'category' juris.area_code %}" style="margin:2px 0px" class="btn btn-success btn-sm">{{ juris.area }}</a>
+		  	<a href="{% url 'zhaokao:category' juris.area_code %}" style="margin:2px 0px" class="btn btn-success btn-sm">{{ juris.area }}</a>
 		 {% endfor %}
   		</div>
 	</div>
@@ -28,7 +28,7 @@
   		<div class="panel-heading">{{ page_title }} - 招考资讯</div>
     		<div class="list-group">
 			{% for item in items %}
-		  	<a target="_blank" href="{% url 'view' item.link %}" class="list-group-item">
+		  	<a target="_blank" href="{% url 'zhaokao:view' item.link %}" class="list-group-item">
 		  		<span class="badge">{{ item.up_date }}</span>
 		  		<span class="badge">{{ item.city }}</span>
 		    	{{ item.title }}
@@ -45,6 +45,5 @@
 {% if pagination_code %}
 {{ pagination_code | safe }}	
 {% endif %}
-
 </div>
 {% endblock %}

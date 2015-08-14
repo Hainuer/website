@@ -13,11 +13,11 @@
 {% for article in articles %}
 <div class="row">
 	<div class="col-sm-12">
-		<h3><a href="{% url 'post' article.uuid %}">{{ article.title }}</a></h3>
-		<h4><small class="text-muted">{{ article.pub_date }} • <a href="{% url 'category' article.category.simple_name %}" class="text-muted">{{ curt_cat.name }}</a> • 评论系统施工中 • 热度: {{ article.views }}'C</small></h4>
+		<h3><a href="{% url 'kume:post' article.uuid %}">{{ article.title }}</a></h3>
+		<h4><small class="text-muted">{{ article.pub_date }} • <a href="{% url 'kume:category' article.category.simple_name %}" class="text-muted">{{ curt_cat.name }}</a> • 评论系统施工中 • 热度: {{ article.views }}'C</small></h4>
 		{{ article.breviary | safe }}
 		<h4>
-			<a href="{% url 'post' article.uuid %}" class="label label-success pull-right">阅读更多</a>
+			<a href="{% url 'kume:post' article.uuid %}" class="label label-success pull-right">阅读更多</a>
 		</h4>
 	</div>
 </div>

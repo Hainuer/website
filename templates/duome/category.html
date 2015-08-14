@@ -1,0 +1,108 @@
+{% extends 'duome_base.html' %}
+{% block page_title %}
+	{{ title }}
+{% endblock %}
+
+{% block main_body %}
+{% if curt_category %}
+<div class="row">
+	<div class="col-lg-12">
+		<div class="page-header">
+			<h2>{{ curt_category.name }}</h2>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-8">
+		{% if articles %}
+		{% for article in articles %}
+		<div class="well">
+			<h2><a href="{% url 'duome:post' article.uuid %}">{{ article.title }}</a></h2>
+			<span class="badge">{{ article.pub_date }}</span>
+			<span class="badge">Phoenix</span>
+			<span class="badge">{{ article.views }}'C</span>
+			<a href="{% url 'duome:post' article.uuid %}" class="btn btn-xs btn-info pull-right">继续阅读</a>
+			<br />
+			<br />
+			<p>{{ article.breviary | safe }}</p>
+		</div>
+		{% endfor %}
+		{% else %}
+		<div class="well">
+			<h4>对不起, 当前目录下没有发布过博客. 请前往管理中心添加吧!</h4>
+		</div>
+		{% endif %}
+		<div>
+			<ul class="pager">
+				{% if articles.has_previous %}
+				<li class="previous"><a href="{% url 'duome:category' curt_category.simple_name %}?page={{ articles.previous_page_number }}">← 前一页</a></li>
+				{% else %}
+				<li class="previous disabled"><a href="#">← 前一页</a></li>
+				{% endif %}
+				{% if articles.has_next %}
+				<li class="next"><a href="{% url 'duome:category' curt_category.simple_name %}?page={{ articles.next_page_number }}">后一页 →</a></li>
+				{% else %}
+				<li class="next disabled"><a href="#">后一页 →</a></li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+	
+	<div class="col-lg-4">
+		<div class="panel panel-default">
+  			<div class="panel-heading">博客目录</div>
+			<div class="list-group">
+				{% if categories %}
+				{% for category in categories %}
+				<a href="{% url 'duome:category' category.simple_name %}" class="list-group-item">
+					<span class="badge">{{ category.nums }}</span>
+					{{ category.name }}
+				</a>
+				{% endfor %}
+				{% else %}
+				<a href="#" class="list-group-item">
+					<span class="badge">0</span>
+					<h4 class="list-group-item-heading">对不起, 博客目录为空. 请前往管理中心添加吧!</h4>
+					<p class="list-group-item-text">Soory, There isn't Blog can load.</p> 
+				</a>
+				{% endif %}
+			</div>
+		</div>
+		<div class="panel panel-default">
+  			<div class="panel-heading">阅读排行</div>
+			<div class="list-group">
+				{% if top_articles %}
+				{% for article in top_articles %}
+				<a href="{% url 'duome:post' article.uuid %}" class="list-group-item">
+					<span class="badge">{{ article.views }}</span>
+					{{ article.title }}
+				</a>
+				{% endfor %}
+				{% else %}
+				<a href="#" class="list-group-item">
+					<span class="badge">0</span>
+					<h4 class="list-group-item-heading">对不起, 当前站点还没有发布过博客. 请前往管理中心添加吧!</h4>
+					<p class="list-group-item-text">Soory, There isn't Blog can load.</p> 
+				</a>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+{% else %}
+<div class="row">
+	<div class="col-lg-12">
+		<div class="page-header">
+			<h2>{{ title }}</h2>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="well">
+			<h4>对不起, 此目录不存在.</h4>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock %}

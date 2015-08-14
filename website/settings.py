@@ -25,6 +25,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'kume',
+    'duome',
     'zhaokao',
     'django_summernote',
 )
@@ -95,5 +96,5 @@ SUMMERNOTE_CONFIG = {
     'iframe': True,
     'airMode': True,
     'width': '100%',
-    'height': '400px',
+    'height': '250px',
 }

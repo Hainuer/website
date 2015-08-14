@@ -27,8 +27,9 @@ from home.views import index
 urlpatterns = [
     url(r'^$', index),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^zhaokao/', include('zhaokao.urls')),
-    url(r'^kume/', include('kume.urls')),
+    url(r'^zhaokao/', include('zhaokao.urls', namespace='zhaokao')),
+    url(r'^kume/', include('kume.urls', namespace='kume')),
+    url(r'^duome/', include('duome.urls', namespace='duome')),
     url(r'^summernote/', include('django_summernote.urls')),
 ]
 

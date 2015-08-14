@@ -2,7 +2,9 @@
 __author__ = 'Phoenix'
 
 from django.shortcuts import render
-from kume.models import Category, Article
+# 使用Duome模块的Models
+from duome.models import Category, Article
+#from kume.models import Category, Article
 
 def index(request):
     cat_li = Category.objects.all()
