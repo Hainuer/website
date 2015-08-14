@@ -1,7 +1,4 @@
 {% extends 'duome_base.html' %}
-{% block page_title %}
-	{{ title }}
-{% endblock %}
 
 {% block main_body %}
 {% if article %}
@@ -18,10 +15,16 @@
 </div>
 <div class="row">
 	<div class="col-lg-8">
-		<blockquote>
-        	<p class="text-primary">{{ article.title }}</p>
-            <small>Phoenix · {{ article.pub_date }} · {{ article.category.name }} · <cite>{{ article.views }}</cite> C'</small>
-		</blockquote>
+		<div class="well">
+			<h4>{{ article.title }}</h4>
+			<p>
+				<span class="label label-default">{{ article.pub_date }} • {{ article.views }} Views</span> &nbsp;
+				<a href="{% url 'duome:category' article.category.simple_name %}" class="label label-primary">{{ article.category.name }}</a> &nbsp;
+				{% for tag in article.tag_li %}
+				<a href="{% url 'duome:tag' tag %}" class="label label-primary">{{ tag }}</a> &nbsp;
+				{% endfor %}
+			</p>
+		</div>
 		{{ article.content | safe }}
 		<div style="height: 20px;"></div>
 	</div>

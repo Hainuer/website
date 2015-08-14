@@ -2,5 +2,3 @@
 __author__ = 'Phoenix'
 
 from django.test import TestCase
-
-# Create your tests here.

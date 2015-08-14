@@ -4,25 +4,44 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="page-header">
-			<h2>文章归档</h2>
+			<h2>标签: {{ title }}</h2>
 		</div>
 	</div>
 </div>
 {% if articles %}
 <div class="row">
 	<div class="col-lg-8">
-		<div class="list-group">
-			{% for article in articles %}
-			<a href="{% url 'duome:post' article.uuid %}" class="list-group-item"> 
-				<span class="badge">{{ article.views }}</span> 
-				<span class="badge">{{ article.pub_date }}</span> 
-				<span class="badge">{{ article.category.name }}</span> 
-				{{ article.title }} 
-			</a>
-			{% endfor %}
+		{% for article in articles %}
+		<div class="well">
+			<h2><a href="{% url 'duome:post' article.uuid %}">{{ article.title }}</a></h2>
+			<p>
+				<span class="label label-default">{{ article.pub_date }} • {{ article.views }} Views</span> &nbsp;
+				<a href="{% url 'duome:category' article.category.simple_name %}" class="label label-primary">{{ article.category.name }}</a> &nbsp;
+				{% for tag in article.tag_li %}
+				<a href="{% url 'duome:tag' tag %}" class="label label-primary">{{ tag }}</a> &nbsp;
+				{% endfor %}
+			</p>
+			<p>{{ article.breviary | safe }}</p>
+			<p><a href="{% url 'duome:post' article.uuid %}" class="btn btn-xs btn-info pull-right">继续阅读</a></p>
+			<br />
+		</div>
+		{% endfor %}
+		<div>
+			<ul class="pager">
+				{% if articles.has_previous %}
+				<li class="previous"><a href="{% url 'duome:category' curt_category.simple_name %}?page={{ articles.previous_page_number }}">← 前一页</a></li>
+				{% else %}
+				<li class="previous disabled"><a href="#">← 前一页</a></li>
+				{% endif %}
+				{% if articles.has_next %}
+				<li class="next"><a href="{% url 'duome:category' curt_category.simple_name %}?page={{ articles.next_page_number }}">后一页 →</a></li>
+				{% else %}
+				<li class="next disabled"><a href="#">后一页 →</a></li>
+				{% endif %}
+			</ul>
 		</div>
 	</div>
-		<div class="col-lg-4">
+	<div class="col-lg-4">
 		<div class="panel panel-default">
   			<div class="panel-heading">博客目录</div>
 			<div class="list-group">
@@ -67,10 +86,9 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="well">
-			<h4>对不起, 当前站点还没有发布过博客. 请前往管理中心添加吧!</h4>
+			<h4>对不起, 当前标签没有对应的博客.</h4>
 		</div>
 	</div>
 </div>
 {% endif %}
- 
 {% endblock %}

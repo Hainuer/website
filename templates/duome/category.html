@@ -1,7 +1,4 @@
 {% extends 'duome_base.html' %}
-{% block page_title %}
-	{{ title }}
-{% endblock %}
 
 {% block main_body %}
 {% if curt_category %}
@@ -18,13 +15,16 @@
 		{% for article in articles %}
 		<div class="well">
 			<h2><a href="{% url 'duome:post' article.uuid %}">{{ article.title }}</a></h2>
-			<span class="badge">{{ article.pub_date }}</span>
-			<span class="badge">Phoenix</span>
-			<span class="badge">{{ article.views }}'C</span>
-			<a href="{% url 'duome:post' article.uuid %}" class="btn btn-xs btn-info pull-right">继续阅读</a>
-			<br />
-			<br />
+			<p>
+				<span class="label label-default">{{ article.pub_date }} • {{ article.views }} Views</span> &nbsp;
+				<a href="{% url 'duome:category' article.category.simple_name %}" class="label label-primary">{{ article.category.name }}</a> &nbsp;
+				{% for tag in article.tag_li %}
+				<a href="{% url 'duome:tag' tag %}" class="label label-primary">{{ tag }}</a> &nbsp;
+				{% endfor %}
+			</p>
 			<p>{{ article.breviary | safe }}</p>
+			<p><a href="{% url 'duome:post' article.uuid %}" class="btn btn-xs btn-info pull-right">继续阅读</a></p>
+			<br />
 		</div>
 		{% endfor %}
 		{% else %}

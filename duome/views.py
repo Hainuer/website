@@ -4,7 +4,10 @@ __author__ = 'Phoenix'
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+from django.db import models
 from duome.models import Article, Category, Mumbler
+from pypinyin import lazy_pinyin
+
 
 # activate_menu
 # 显示当前激活的菜单
@@ -18,6 +21,7 @@ from duome.models import Article, Category, Mumbler
 # 首页视图
 def index(request):
     articles = Article.objects.all().order_by('-pub_date')[:10]
+    articles = getTagsArticles(articles)
     categories = Category.objects.all()
     ctx_dict = {
         'articles': articles, 
@@ -61,7 +65,7 @@ def category(request, simple_name):
     title = simple_name
     
     for idx in range(0, len(categories)):
-         categories[idx].nums = len(Article.objects.filter(category=categories[idx]))
+        categories[idx].nums = len(Article.objects.filter(category=categories[idx]))
     top_articles = Article.objects.all().order_by('-views')[:10]
     ctx_dict = {
         'categories': categories, 
@@ -81,8 +85,9 @@ def category(request, simple_name):
                 articles = paginator.page(1)
             except EmptyPage:
                 articles = paginator.page(paginator.num_pages)
-           
+            articles = getTagsArticles(articles)
             ctx_dict['articles'] = articles
+            
             ctx_dict['curt_category'] = curt_category
             title = curt_category.name
     except Category.DoesNotExist:
@@ -97,6 +102,7 @@ def post(request, uuid):
     categories = Category.objects.all()
     try:
         article = Article.objects.filter(uuid=uuid)[0]
+        article.tag_li = getTagsArticle(article)
         article.views = article.views + 1
         article.save()
         title = article.title
@@ -105,7 +111,7 @@ def post(request, uuid):
         title = uuid
     
     for idx in range(0, len(categories)):
-         categories[idx].nums = len(Article.objects.filter(category=categories[idx]))
+        categories[idx].nums = len(Article.objects.filter(category=categories[idx]))
     top_articles = Article.objects.all().order_by('-views')[:10]
     ctx_dict = {
         'categories': categories, 
@@ -143,3 +149,47 @@ def about(request):
     }
     return render(request, 'duome/about.html', ctx_dict)
 
+# Tags
+def tag(request, tag):
+    articles = Article.objects.filter(tags__contains=tag)
+    paginator = Paginator(articles, 5)
+    # 分页
+    page = request.GET.get('page')
+    try:
+        articles = paginator.page(page)
+    except PageNotAnInteger:
+        articles = paginator.page(1)
+    except EmptyPage:
+        articles = paginator.page(paginator.num_pages)
+    articles = getTagsArticles(articles)
+    
+    categories = Category.objects.all()
+    top_articles = Article.objects.all().order_by('-views')[:10]
+    
+    ctx_dict = {
+        'categories': categories,
+        'title': tag, 
+        'activate_menu': '2',
+        'top_articles': top_articles,
+        'articles': articles,
+    }
+    return render(request, 'duome/tag.html', ctx_dict)
+
+
+# ---------------------------------------------------------------------------------------------- #
+
+# 获取Article的标签
+def getTagsArticle(article):
+    if len(article.tags) > 0:
+        tag_li = []
+        for tag in article.tags.split(' '):
+            tag_li.append(tag)
+        return tag_li
+    
+# 调用getTagsArticle获取Articles的标签
+def getTagsArticles(articles):
+    for idx in range(0, len(articles)):
+        articles[idx].tag_li = getTagsArticle(articles[idx])
+    return articles
+
+# ---------------------------------------------------------------------------------------------- #

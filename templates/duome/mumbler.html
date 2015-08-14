@@ -1,7 +1,4 @@
 {% extends 'duome_base.html' %}
-{% block page_title %}
-	{{ title }}
-{% endblock %}
 
 {% block main_body %}
 <div class="row">
@@ -20,14 +17,13 @@
 <div class="row">
 	<div class="col-lg-8">
 		{% for mumbler in mumblers %}
-		<div class="well well-sm">
+		<div class="well">
 			<br />
            	{{ mumbler.content | safe }}
            	<p class="pull-right">
-           		<span class="badge">{{ mumbler.pub_date }}</span>
-           		<span class="badge">{{ mumbler.location }}</span>
+           		<span class="label label-primary">{{ mumbler.pub_date }}</span>
+           		<span class="label label-primary">{{ mumbler.location }}</span>
            	</p>
-			<br />
 			<br />
        	</div>
 		{% endfor %}
