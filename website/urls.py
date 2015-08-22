@@ -26,6 +26,7 @@ from home.views import index
 
 urlpatterns = [
     url(r'^$', index),
+    url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^zhaokao/', include('zhaokao.urls', namespace='zhaokao')),
     url(r'^kume/', include('kume.urls', namespace='kume')),

@@ -18,6 +18,7 @@ ALLOWED_HOSTS = ['127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = (
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -88,6 +89,7 @@ USE_TZ = True
 
 #STATIC_URL = 'http://hainuer.oss-cn-shenzhen.aliyuncs.com/static/'
 STATIC_URL = '/static/'
+#STATIC_ROOT   = os.path.join(BASE_DIR, 'static')
 STATIC_PATH   = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = ( STATIC_PATH, )
 
